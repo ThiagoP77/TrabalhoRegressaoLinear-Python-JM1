@@ -3,7 +3,7 @@ Grupo: Gabriel Fassina Fereguetti, Marllon Monteiro Cardoso e Thiago Piffer Laur
  
 Relação escolhida para regressão linear simples: linhas de código (X) x complexidade ciclomática (Y)
 
-Fontes de dados : 
+Fontes: 
 -Dataset: https://www.kaggle.com/datasets/aczy156/software-defect-prediction-nasa
 -Exemplo com explicação do dataset: https://github.com/MostafaMohamedEr/JM1-SoftwareDefectPrediction-
 -Exemplo de uso: https://github.com/messuuu/jm1-software-defect-prediction-
