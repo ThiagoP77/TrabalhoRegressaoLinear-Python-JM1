@@ -20,6 +20,6 @@ python -m pip install pandas numpy matplotlib scipy kagglehub
 
 ## Fontes
 
-* **Dataset Principal:** (https://www.kaggle.com/datasets/aczy156/software-defect-prediction-nasa)
+* **Dataset:** (https://www.kaggle.com/datasets/aczy156/software-defect-prediction-nasa)
 * **Exemplo e Explicação do Dataset:** (https://github.com/MostafaMohamedEr/JM1-SoftwareDefectPrediction-)
 * **Exemplo de Uso:** (https://github.com/messuuu/jm1-software-defect-prediction-)
