@@ -105,15 +105,15 @@ def main():#Função main do programa
     n = len(x)#Variável que guarda o número de registros
  
     #1-Pesquisa sobre os dados
-    print("\n" + "=" * 100)#Somente a exibição dos dados pelo programa
+    print("\n" + "=" * 30)#Somente a exibição dos dados pelo programa
     print("DESCRIÇÃO DOS DADOS")
-    print("=" * 100)
-    print(f"Variável X: linhas de código do módulo ({COL_X})")
-    print(f"Variável Y: complexidade ciclomática do módulo ({COL_Y})")
-    print(f"Amostra: n = {n}")
+    print("=" * 30)
+    print(f"Variável X: linhas de código ({COL_X}).")
+    print(f"Variável Y: complexidade ciclomática ({COL_Y}).")
+    print(f"Quantidade de registros: n = {n}.")
  
-    resumo = df[[COL_X, COL_Y]].describe().round(2)#Faz a descrição dos dados da tabela (analise geral), levando em conta as duas colunas especificadas
-    resumo.columns = ["Linhas de código (X)", "Complexidade ciclomática v(g) (Y)"]#Determina os nomes de cada coluna
+    resumo = df[[COL_X, COL_Y]].describe().round(2)#Faz a descrição dos dados das colunas
+    resumo.columns = ["Linhas de código (X)", "Complexidade ciclomática (Y)"]#Determina os nomes de cada coluna
     print(resumo)#Exibe o resultado
  
     #2-Diagrama de dispersão
@@ -122,7 +122,7 @@ def main():#Função main do programa
  
     ax1.set_title("Diagrama de dispersão: linhas de código x complexidade ciclomática")#Define o título do gráfico
     ax1.set_xlabel("Linhas de código (X)")#Define o rótulo do eixo X
-    ax1.set_ylabel("Complexidade ciclomática v(g) (Y)")#Define o rótulo do eixo Y
+    ax1.set_ylabel("Complexidade ciclomática (Y)")#Define o rótulo do eixo Y
  
     ax1.grid(alpha=0.3)#Deixa a grade do gráfico mais escondida para facilitar visualização
     fig1.tight_layout()#Ajuste de margens
@@ -137,15 +137,15 @@ def main():#Função main do programa
  
     r = sxy / np.sqrt(sxx * syy)#Calcula o coeficiente de correlação
  
-    print("\n" + "=" * 60)#Somente a exibição dos dados pelo programa
+    print("\n" + "=" * 30)#Somente a exibição dos dados pelo programa
     print("CORRELAÇÃO LINEAR")
-    print("=" * 60)
-    print(f"x̄ = {x_med:.4f} linhas | ȳ = {y_med:.4f} (complexidade)")
-    print(f"Σxy - n·x̄·ȳ = {sxy:,.2f}")
-    print(f"Σx² - n·x̄²  = {sxx:,.2f}")
-    print(f"Σy² - n·ȳ²  = {syy:,.2f}")
-    print(f"r = {r:.4f}")
-    print(f"r² = {r**2:.4f}")
+    print("=" * 30)
+    print(f"x̄ = {x_med:.4f} linhas | ȳ = {y_med:.4f} (complexidade).")
+    print(f"Σxy - n·x̄·ȳ = {sxy:,.2f}.")
+    print(f"Σx² - n·x̄²  = {sxx:,.2f}.")
+    print(f"Σy² - n·ȳ²  = {syy:,.2f}.")
+    print(f"r = {r:.4f}.")
+    print(f"r² = {r**2:.4f}.")
     print(f"Classificação: correlação linear {classificar_correlacao(r)}.")
     print(f"Cerca de {r**2 * 100:.1f}% da variação da complexidade ciclomática é explicada "
           "linearmente pelas linhas de código.")
@@ -154,15 +154,15 @@ def main():#Função main do programa
     a = sxy / sxx#Calcula o coeficiente A
     b = y_med - a * x_med#Calcula o coeficiente B
  
-    res = stats.linregress(x, y)
-    assert np.isclose(a, res.slope) and np.isclose(b, res.intercept)
+    res = stats.linregress(x, y)#Calcula a regressão linear simples
+    assert np.isclose(a, res.slope) and np.isclose(b, res.intercept)#Calcula se o cálculo manual e automatico deram no mesmo resultado
  
-    print("\n" + "=" * 60)#Somente a exibição dos dados pelo programa
+    print("\n" + "=" * 30)#Somente a exibição dos dados pelo programa
     print("REGRESSÃO LINEAR SIMPLES")
-    print("=" * 60)
-    print(f"a (inclinação) = Sxy / Sxx = {a:.4f}")
-    print(f"b (intercepto) = ȳ - a·x̄   = {b:.4f}")
-    print(f"Equação:  v(g) = {a:.4f}X {b:+.4f}")
+    print("=" * 30)
+    print(f"a = Sxy / Sxx = {a:.4f}.")
+    print(f"b = ȳ - a·x̄   = {b:.4f}.")
+    print(f"Equação:  Y = {a:.4f}X + {b:.4f}.")
  
     #5-Diagrama de dispersão com a reta no mesmo gráfico
     xs = np.linspace(x.min(), x.max(), 200)#Cria 200 valores de X igualmente espaçados, seguindo o intervalo do menor ao maior X
@@ -175,7 +175,7 @@ def main():#Função main do programa
  
     ax2.set_title("Regressão linear: linhas de código x complexidade ciclomática")#Define o título do gráfico
     ax2.set_xlabel("Linhas de código (X)")#Define o rótulo do eixo X
-    ax2.set_ylabel("Complexidade ciclomática v(g) (Y)")#Define o rótulo do eixo Y
+    ax2.set_ylabel("Complexidade ciclomática (Y)")#Define o rótulo do eixo Y
  
     ax2.grid(alpha=0.3)#Deixa a grade do gráfico mais escondida para facilitar visualização
     ax2.legend()#Exibe a caixa de legenda
@@ -183,15 +183,15 @@ def main():#Função main do programa
     fig2.savefig("diagrama_regressao_reta.png", dpi=150)#Salva a imagem do gráfico na pasta atual
  
     #6-Previsões
-    print("\n" + "=" * 60)#Somente a exibição dos dados pelo programa
-    print("PREVISÕES DO MODELO")
-    print("=" * 60)
+    print("\n" + "=" * 30)#Somente a exibição dos dados pelo programa
+    print("PREVISÕES SEGUNDO A EQUAÇÃO")
+    print("=" * 30)
  
     for loc in PREVISOES_LOC:#Percorre a lista com linhas de código determinadas e calcula o Y pela equação da reta, exibindo o resultado
         prev = a * loc + b
  
-        aviso = "  (fora do intervalo observado: extrapolação!)" \
-            if loc < x.min() or loc > x.max() else ""#Exibe aviso de extrapolação caso o valor seja superior ou inferior aos observados
+        aviso = "  (fora do intervalo observado)." \
+            if loc < x.min() or loc > x.max() else ""#Exibe aviso caso o valor seja superior ou inferior aos observados
  
         print(f"{loc:>5} linhas de código -> v(g) previsto = {prev:>7.2f}{aviso}")
  

@@ -15,11 +15,11 @@ No contexto de uma regressão linear, a relação escolhida para a análise nos 
 ## Dependências 
 
 ```bash
-pip install pandas numpy matplotlib scipy kagglehub
+python -m pip install pandas numpy matplotlib scipy kagglehub
 ```
 
 ## Fontes
 
 * **Dataset Principal:** (https://www.kaggle.com/datasets/aczy156/software-defect-prediction-nasa)
 * **Exemplo e Explicação do Dataset:** (https://github.com/MostafaMohamedEr/JM1-SoftwareDefectPrediction-)
-* **Exemplo de Uso e Implementação:** (https://github.com/messuuu/jm1-software-defect-prediction-)
+* **Exemplo de Uso:** (https://github.com/messuuu/jm1-software-defect-prediction-)
