@@ -187,7 +187,7 @@ def main():#Função main do programa
         aviso = "  (fora do intervalo observado)." \
             if loc < x.min() or loc > x.max() else ""#Exibe aviso caso o valor seja superior ou inferior aos observados
  
-        print(f"{loc:>5} linhas de código -> v(g) previsto = {prev:>7.2f}{aviso}")
+        print(f"{loc:>5} linhas de código -> v(g) previsto = {prev:>7.2f} ({round(prev)}){aviso}")
  
     plt.show()#Abre janelas exibindo os gráficos
  
