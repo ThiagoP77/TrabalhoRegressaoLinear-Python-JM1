@@ -23,37 +23,31 @@ from scipy import stats
 
 
 #Definindo variáveis globais
-DATASET_LINK = "aczy156/software-defect-prediction-nasa"#Guarda o link do dataset usado
+ARQUIVO_DADOS = "jm1.csv"#Guarda o link do dataset usado
  
 COL_X = "loc"#Guarda o nome da coluna referente à quantidade de linhas de código
 COL_Y = "v(g)"#Guarda o nome da coluna referente à complexidade ciclomática (número de caminhos lógicos)
  
-PREVISOES_LOC = [10, 50, 100, 200, 300, 500, 1000, 2000, 3000]#Lista com alguns valores de linhas de código para teste de previsão
+PREVISOES_TESTES = [10, 50, 100, 200, 300, 500, 1000, 2000, 3000]#Lista com alguns valores de linhas de código para teste de previsão
  
 
 #Funções para carregar os dados do dataset
-def localizar_csv():#Função que localiza e retorna o arquivo ".csv" com os dados usados
- 
-    pasta = kagglehub.dataset_download(DATASET_LINK)#Baixa o dataset indicado pelo link e guarda o caminho
- 
-    if os.path.isfile(pasta):#Se o caminho informado já for um arquivo válido, usa ele diretamente
-        return pasta
- 
-    candidatos = []#Lista dos arquivos ".csv" que têm as colunas procuradas
- 
-    #Percorre todos os ".csv" indicados pelo link
-    for arq in sorted(glob.glob(os.path.join(pasta, "**", "*.csv"), recursive=True)):#Percorre todos os arquivos ".csv" da pasta
-        colunas = pd.read_csv(arq, nrows=0).columns#Recebe as colunas
-        if COL_X in colunas and COL_Y in colunas:#Verifica se as procuradas estão inclusas
-            candidatos.append(arq)
- 
-    #Retorna erro caso nenhum ".csv" tenha as colunas procuradas
-    if not candidatos:
-        raise FileNotFoundError(
-            f"Erro: Nenhum CSV com as colunas {COL_X} e {COL_Y} em {pasta}. "
-        )
- 
-    return candidatos[0]#Retona o primeiro ".csv" encontrado
+def localizar_csv():#Função que localiza e retorna o caminho do arquivo ".csv" com os dados usados
+
+    pasta = os.path.dirname(os.path.abspath(__file__))#Pega a pasta onde este arquivo ".py" está salvo
+    caminho = os.path.join(pasta, ARQUIVO_DADOS)#Monta o caminho completo do ".csv", que deve estar na mesma pasta
+
+    #Retorna erro caso o arquivo não esteja na pasta
+    if not os.path.isfile(caminho):
+        raise FileNotFoundError(f"Erro: o arquivo {ARQUIVO_DADOS} não foi encontrado em {pasta}.")
+
+    colunas = pd.read_csv(caminho, nrows=0).columns#Recebe as colunas do arquivo
+
+    #Retorna erro caso o arquivo não tenha as colunas procuradas
+    if COL_X not in colunas or COL_Y not in colunas:
+        raise ValueError(f"Erro: o arquivo {ARQUIVO_DADOS} não tem as colunas {COL_X} e {COL_Y}.")
+
+    return caminho#Retorna o caminho do ".csv"
  
 def carregar_dados():#Função que filtra e retorna os dados
  
@@ -187,7 +181,7 @@ def main():#Função main do programa
     print("PREVISÕES SEGUNDO A EQUAÇÃO")
     print("=" * 30)
  
-    for loc in PREVISOES_LOC:#Percorre a lista com linhas de código determinadas e calcula o Y pela equação da reta, exibindo o resultado
+    for loc in PREVISOES_TESTES:#Percorre a lista com linhas de código determinadas e calcula o Y pela equação da reta, exibindo o resultado
         prev = a * loc + b
  
         aviso = "  (fora do intervalo observado)." \
