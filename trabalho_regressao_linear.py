@@ -8,13 +8,11 @@ Fontes:
 -Exemplo com explicação do dataset: https://github.com/MostafaMohamedEr/JM1-SoftwareDefectPrediction-
 -Exemplo de uso: https://github.com/messuuu/jm1-software-defect-prediction-
  
-Dependências para rodar o código: pip install pandas numpy matplotlib scipy kagglehub
+Dependências para rodar o código: pip install pandas numpy matplotlib scipy
 """
 
 
 #Imports necessários
-import kagglehub
-import glob
 import os
 import matplotlib.pyplot as plt
 import numpy as np
@@ -23,7 +21,7 @@ from scipy import stats
 
 
 #Definindo variáveis globais
-ARQUIVO_DADOS = "jm1.csv"#Guarda o link do dataset usado
+ARQUIVO_DADOS = "jm1.csv"#Guarda o nome do arquivo com dados usado
  
 COL_X = "loc"#Guarda o nome da coluna referente à quantidade de linhas de código
 COL_Y = "v(g)"#Guarda o nome da coluna referente à complexidade ciclomática (número de caminhos lógicos)
@@ -123,7 +121,7 @@ def main():#Função main do programa
     fig1.savefig("diagrama_de_dispersao.png", dpi=150)#Salva a imagem do gráfico na pasta atual
  
     #3-Cálculo e análise da correlação
-    x_med, y_med = x.mean(), y.mean()#Calcula as média de X e de Y
+    x_med, y_med = x.mean(), y.mean()#Calcula as médias de X e de Y
  
     sxy = np.sum(x * y) - n * x_med * y_med#Calcula Σxy − n·x̄·ȳ
     sxx = np.sum(x**2) - n * x_med**2#Calcula Σx² − n·x̄²
@@ -165,7 +163,7 @@ def main():#Função main do programa
  
     #Cria a reta de regressão, tendo a equação e o r na legenda
     ax2.plot(xs, a * xs + b, color="#d62728", linewidth=2.5,
-             label=f"Reta: y = {a:.4f}·x {b:+.2f}; (r = {r:.2f}, R² = {r**2:.2f})")
+             label=f"Reta: y = {a:.4f}·x {b:+.4f}; (r = {r:.2f}, R² = {r**2:.2f})")
  
     ax2.set_title("Regressão linear: linhas de código x complexidade ciclomática")#Define o título do gráfico
     ax2.set_xlabel("Linhas de código (X)")#Define o rótulo do eixo X

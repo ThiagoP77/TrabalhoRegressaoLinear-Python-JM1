@@ -15,7 +15,7 @@ No contexto de uma regressão linear, a relação escolhida para a análise nos 
 ## Dependências 
 
 ```bash
-python -m pip install pandas numpy matplotlib scipy kagglehub
+python -m pip install pandas numpy matplotlib scipy
 ```
 
 ## Fontes
